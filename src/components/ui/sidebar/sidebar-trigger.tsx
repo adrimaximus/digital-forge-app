@@ -1,0 +1,38 @@
+
+import * as React from "react"
+import { Menu, PanelLeft } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { useSidebar } from "./sidebar-provider"
+
+export const SidebarTrigger = React.forwardRef<
+  React.ElementRef<typeof Button>,
+  React.ComponentProps<typeof Button> & {
+    mobileOnly?: boolean;
+  }
+>(({ className, onClick, mobileOnly = false, ...props }, ref) => {
+  const { toggleSidebar, isMobile } = useSidebar()
+
+  if (mobileOnly && !isMobile) {
+    return null;
+  }
+
+  return (
+    <Button
+      ref={ref}
+      data-sidebar="trigger"
+      variant="ghost"
+      size="icon"
+      className={cn("h-7 w-7", className)}
+      onClick={(event) => {
+        onClick?.(event)
+        toggleSidebar()
+      }}
+      {...props}
+    >
+      {isMobile ? <Menu className="h-5 w-5" /> : <PanelLeft className="h-5 w-5" />}
+      <span className="sr-only">Toggle Sidebar</span>
+    </Button>
+  )
+})
+SidebarTrigger.displayName = "SidebarTrigger"
