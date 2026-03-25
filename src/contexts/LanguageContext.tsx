@@ -36,6 +36,16 @@ const translations = {
     'about.stat.2': 'Klien Puas',
     'about.stat.3': 'Dukungan',
     'about.stat.4': 'Mitra Bisnis',
+    'Website berbasis AI': 'Website berbasis AI',
+    'Sistem Portal Bisnis': 'Sistem Portal Bisnis',
+    'Temukan insight dan trend terkini yang relevan dengan produk Anda untuk meningkatkan sales, jadikan putusan strategis Anda.': 'Temukan insight dan trend terkini yang relevan dengan produk Anda untuk meningkatkan sales, jadikan putusan strategis Anda.',
+    'Fitur Layanan': 'Fitur Layanan',
+    'Analisis Keyword': 'Analisis Keyword',
+    'Identifikasi keyword dengan volume search tinggi dan kompetisi rendah untuk meningkatkan peringkat SEO Anda.': 'Identifikasi keyword dengan volume search tinggi dan kompetisi rendah untuk meningkatkan peringkat SEO Anda.',
+    'Social Media Monitoring': 'Social Media Monitoring',
+    'Pantau percakapan tentang brand Anda di berbagai platform sosial media untuk insight real-time.': 'Pantau percakapan tentang brand Anda di berbagai platform sosial media untuk insight real-time.',
+    'Competitor Analysis': 'Competitor Analysis',
+    'Bandingkan strategi digital kompetitor Anda dan temukan gap untuk dimanfaatkan.': 'Bandingkan strategi digital kompetitor Anda dan temukan gap untuk dimanfaatkan.',
   },
   en: {
     'nav.home': 'Home',
@@ -64,6 +74,16 @@ const translations = {
     'about.stat.2': 'Satisfied Clients',
     'about.stat.3': 'Support',
     'about.stat.4': 'Business Partners',
+    'Website berbasis AI': 'AI-Powered Website',
+    'Sistem Portal Bisnis': 'Business Portal System',
+    'Temukan insight dan trend terkini yang relevan dengan produk Anda untuk meningkatkan sales, jadikan putusan strategis Anda.': 'Discover the latest insights and trends relevant to your products to boost sales and empower your strategic decisions.',
+    'Fitur Layanan': 'Service Features',
+    'Analisis Keyword': 'Keyword Analysis',
+    'Identifikasi keyword dengan volume search tinggi dan kompetisi rendah untuk meningkatkan peringkat SEO Anda.': 'Identify keywords with high search volume and low competition to improve your SEO rankings.',
+    'Social Media Monitoring': 'Social Media Monitoring',
+    'Pantau percakapan tentang brand Anda di berbagai platform sosial media untuk insight real-time.': 'Monitor conversations about your brand across various social media platforms for real-time insights.',
+    'Competitor Analysis': 'Competitor Analysis',
+    'Bandingkan strategi digital kompetitor Anda dan temukan gap untuk dimanfaatkan.': 'Compare your competitors\' digital strategies and discover gaps to capitalize on.',
   }
 };
 

@@ -6,11 +6,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { LucideIcon } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Services: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("0");
   const tabsListRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  const { t } = useLanguage();
 
   // Filter out the services that should be hidden for now
   const visibleServices = servicesData.filter(service => {
@@ -36,7 +38,7 @@ const Services: React.FC = () => {
                   const Icon = service.icon as LucideIcon;
                   return <TabsTrigger key={index} value={index.toString()} className="flex-shrink-0 w-full min-h-[38px] flex items-center justify-start gap-2 data-[state=active]:bg-yellow-400 data-[state=active]:text-black rounded-md snap-start px-[14px] my-[3px] py-0 mx-0 font-normal">
                         {Icon && <Icon className="h-5 w-5 flex-shrink-0" />}
-                        <span className="text-sm md:text-base font-medium">{service.title}</span>
+                        <span className="text-sm md:text-base font-medium">{t(service.title)}</span>
                       </TabsTrigger>;
                 })}
                 </TabsList>
@@ -48,18 +50,18 @@ const Services: React.FC = () => {
             <div className="flex flex-col bg-slate-800/30 p-6 md:p-8 rounded-lg border border-white/5 w-full">
               {visibleServices.map((service, index) => <TabsContent key={index} value={index.toString()} className="mt-0 animate-in fade-in">
                   <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-white">
-                    {service.title}
+                    {t(service.title)}
                   </h3>
                   <p className="text-gray-400 mb-6 leading-relaxed text-sm md:text-base">
-                    {service.description}
+                    {t(service.description)}
                   </p>
                   
                   {service.features && service.features.length > 0 && <div>
-                      <h4 className="font-medium text-base md:text-lg mb-3 md:mb-4 text-yellow-400">Fitur Layanan</h4>
+                      <h4 className="font-medium text-base md:text-lg mb-3 md:mb-4 text-yellow-400">{t('Fitur Layanan')}</h4>
                       <ul className="space-y-3 md:space-y-4">
                         {service.features.map((feature, idx) => <li key={idx} className="border-l-2 border-yellow-400 pl-3 md:pl-4 py-1 md:py-2">
-                            <p className="font-medium text-sm md:text-base text-white/90">{feature.name}</p>
-                            <p className="text-xs md:text-sm text-gray-400 mt-0.5 md:mt-1">{feature.description}</p>
+                            <p className="font-medium text-sm md:text-base text-white/90">{t(feature.name)}</p>
+                            <p className="text-xs md:text-sm text-gray-400 mt-0.5 md:mt-1">{t(feature.description)}</p>
                           </li>)}
                       </ul>
                     </div>}
