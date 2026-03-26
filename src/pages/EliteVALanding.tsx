@@ -263,16 +263,16 @@ const HowItWorksSection: React.FC = () => {
   const selectedSupportLabels = supportOptions.filter((item) => selectedSupport.includes(item.id)).map((item) => item.label);
 
   return (
-    <section id="how-it-works" className="pt-8 md:pt-14 pb-16 md:pb-24 bg-white">
+    <section id="how-it-works" className="pt-10 md:pt-16 pb-20 md:pb-24 bg-white">
       <div className="max-w-6xl mx-auto px-4 md:px-6">
-        <div className="relative overflow-hidden rounded-[2.25rem] border border-yellow-100 bg-[radial-gradient(circle_at_top_left,rgba(253,209,0,0.22),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(253,209,0,0.14),transparent_26%),linear-gradient(145deg,#ffffff,rgba(255,250,221,0.82))] shadow-[0_30px_100px_rgba(253,209,0,0.16)]">
+        <div className="relative overflow-hidden rounded-[2.4rem] border border-yellow-100 bg-[radial-gradient(circle_at_top_left,rgba(253,209,0,0.22),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(253,209,0,0.14),transparent_26%),linear-gradient(145deg,#ffffff,rgba(255,250,221,0.82))] shadow-[0_32px_100px_rgba(253,209,0,0.16)]">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-yellow-300 to-transparent" />
           <div className="absolute -top-20 -left-10 h-52 w-52 rounded-full blur-3xl" style={{ background: 'rgba(253,209,0,0.18)' }} />
           <div className="absolute top-24 right-0 h-64 w-64 rounded-full blur-3xl" style={{ background: 'rgba(253,209,0,0.12)' }} />
           <div className="absolute bottom-0 left-1/3 h-56 w-56 rounded-full blur-3xl" style={{ background: 'rgba(253,209,0,0.10)' }} />
 
-          <div className="relative z-10 p-6 md:p-10 lg:p-12">
-            <div className="text-center mb-10 md:mb-14">
+          <div className="relative z-10 p-6 md:p-10 lg:p-14">
+            <div className="text-center mb-12 md:mb-16">
               <p className="text-xs font-bold tracking-[0.24em] uppercase mb-3" style={{ color: '#fdd100' }}>
                 How It Works
               </p>
@@ -280,47 +280,67 @@ const HowItWorksSection: React.FC = () => {
                 Build the right agent, connect the right tools, reach the right outcome
               </h2>
               <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Pilih fokus layanan utama dan support yang paling penting untuk operasionalmu. Flow ini dibuat supaya user langsung paham:
-                agent dibangun, dihubungkan ke WhatsApp dan tools kerja, lalu menghasilkan kapasitas kerja yang benar-benar naik.
+                Flow dibuat lebih jelas: dari agent creation, pilih fokus layanan, masuk ke WhatsApp, connect ke tools kerja,
+                lalu berujung pada assistant yang benar-benar membantu scale up pekerjaan tim.
               </p>
             </div>
 
-            <div className="relative">
-              <div className="hidden lg:block absolute left-[10%] right-[10%] top-[5.25rem] h-[2px] bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-200" />
-              <div className="hidden lg:block absolute top-[5rem] left-[12%] h-3 w-3 rounded-full bg-yellow-400 shadow-[0_0_0_10px_rgba(253,209,0,0.12)] animate-pulse" />
-              <div className="hidden lg:block absolute top-[5rem] left-[34%] h-3 w-3 rounded-full bg-yellow-400 shadow-[0_0_0_10px_rgba(253,209,0,0.12)] animate-pulse [animation-delay:200ms]" />
-              <div className="hidden lg:block absolute top-[5rem] left-[56%] h-3 w-3 rounded-full bg-yellow-400 shadow-[0_0_0_10px_rgba(253,209,0,0.12)] animate-pulse [animation-delay:400ms]" />
-              <div className="hidden lg:block absolute top-[5rem] left-[78%] h-3 w-3 rounded-full bg-yellow-400 shadow-[0_0_0_10px_rgba(253,209,0,0.12)] animate-pulse [animation-delay:600ms]" />
-              <div className="hidden md:block lg:hidden absolute left-8 top-16 bottom-16 w-[2px] bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-200" />
+            <div className="relative hidden xl:block mb-10">
+              <div className="absolute left-[16.66%] right-[16.66%] top-[6rem] h-[2px] bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-200" />
+              <div className="absolute left-1/2 top-[6rem] h-[4.75rem] w-[2px] -translate-x-1/2 bg-gradient-to-b from-yellow-300 via-yellow-400 to-yellow-200" />
+              <div className="absolute left-[33.33%] top-[10.75rem] h-[2px] w-[33.34%] bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-200" />
 
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-5">
-                <div className="relative rounded-3xl bg-white/90 border border-yellow-100 p-5 shadow-[0_20px_45px_rgba(17,24,39,0.06)] backdrop-blur">
+              {[
+                'left-[16.66%] top-[5.72rem]',
+                'left-[50%] top-[5.72rem] -translate-x-1/2',
+                'left-[83.33%] top-[5.72rem] -translate-x-full',
+                'left-[33.33%] top-[10.47rem] -translate-x-1/2',
+                'left-[66.67%] top-[10.47rem] -translate-x-1/2',
+                'left-[50%] top-[8.1rem] -translate-x-1/2'
+              ].map((pos) => (
+                <div
+                  key={pos}
+                  className={`absolute ${pos} h-3.5 w-3.5 rounded-full bg-yellow-400 shadow-[0_0_0_10px_rgba(253,209,0,0.11)] animate-pulse`}
+                />
+              ))}
+            </div>
+
+            <div className="relative xl:hidden">
+              <div className="absolute left-4 top-6 bottom-6 w-[2px] bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-200" />
+              {['top-8', 'top-[32%]', 'top-[55%]', 'top-[76%]', 'bottom-8'].map((pos) => (
+                <div
+                  key={pos}
+                  className={`absolute left-[9px] ${pos} h-3 w-3 rounded-full bg-yellow-400 shadow-[0_0_0_8px_rgba(253,209,0,0.11)]`}
+                />
+              ))}
+            </div>
+
+            <div className="relative space-y-8 xl:space-y-10">
+              <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 xl:gap-8">
+                <div className="relative rounded-3xl bg-white/92 border border-yellow-100 p-6 shadow-[0_20px_45px_rgba(17,24,39,0.06)] backdrop-blur xl:min-h-[250px] xl:ml-0 ml-8">
                   <div className="flex items-center justify-between mb-5">
                     <span className="text-xs font-bold tracking-widest text-gray-400">STEP 01</span>
                     <div className="w-11 h-11 rounded-2xl flex items-center justify-center bg-yellow-100 text-gray-900 shadow-sm">
                       <UserPlus size={20} />
                     </div>
                   </div>
-                  <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2">Create your AI agent</h3>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Create your AI agent</h3>
                   <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                    Agent dibangun sesuai workflow bisnismu, bukan template generik.
+                    Agent dibangun sesuai workflow bisnis user, bukan template generik.
                   </p>
-                  <div className="rounded-2xl border border-yellow-100 bg-yellow-50/70 p-3 text-sm text-gray-700">
+                  <div className="rounded-2xl border border-yellow-100 bg-yellow-50/70 p-4 text-sm text-gray-700">
                     Personal AI operator yang siap menerima role utama dan role pendukung.
-                  </div>
-                  <div className="hidden lg:flex absolute -right-3 top-[4.85rem] w-7 h-7 rounded-full items-center justify-center bg-white border border-yellow-200 shadow-md">
-                    <ArrowRight size={14} className="text-gray-700" />
                   </div>
                 </div>
 
-                <div className="relative rounded-3xl bg-white/90 border border-yellow-100 p-5 shadow-[0_20px_45px_rgba(17,24,39,0.06)] backdrop-blur">
+                <div className="relative rounded-3xl bg-white/92 border border-yellow-100 p-6 shadow-[0_20px_45px_rgba(17,24,39,0.06)] backdrop-blur xl:min-h-[250px] xl:ml-0 ml-8">
                   <div className="flex items-center justify-between mb-5">
                     <span className="text-xs font-bold tracking-widest text-gray-400">STEP 02</span>
                     <div className="w-11 h-11 rounded-2xl flex items-center justify-center bg-yellow-100 text-gray-900 shadow-sm">
                       <Target size={20} />
                     </div>
                   </div>
-                  <h3 className="text-base md:text-lg font-bold text-gray-900 mb-3">Choose the right focus mix</h3>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3">Choose the right focus mix</h3>
                   <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Primary focus · pilih 2</p>
                   <div className="space-y-2.5 mb-4">
                     {primaryOptions.map((item) => {
@@ -386,12 +406,9 @@ const HowItWorksSection: React.FC = () => {
                       );
                     })}
                   </div>
-                  <div className="hidden lg:flex absolute -right-3 top-[4.85rem] w-7 h-7 rounded-full items-center justify-center bg-white border border-yellow-200 shadow-md">
-                    <ArrowRight size={14} className="text-gray-700" />
-                  </div>
                 </div>
 
-                <div className="relative rounded-3xl bg-gray-900 text-white p-5 shadow-[0_22px_55px_rgba(17,24,39,0.18)] overflow-hidden">
+                <div className="relative rounded-3xl bg-gray-900 text-white p-6 shadow-[0_22px_55px_rgba(17,24,39,0.18)] overflow-hidden xl:min-h-[250px] xl:ml-0 ml-8">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(253,209,0,0.18),transparent_30%)]" />
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-5">
@@ -400,32 +417,31 @@ const HowItWorksSection: React.FC = () => {
                         <MessageCircle size={20} style={{ color: '#fdd100' }} />
                       </div>
                     </div>
-                    <h3 className="text-base md:text-lg font-bold mb-2">Inject into WhatsApp</h3>
+                    <h3 className="text-lg font-bold mb-2">Inject into WhatsApp</h3>
                     <p className="text-sm text-gray-300 leading-relaxed mb-4">
                       Setelah fokus dipilih, agent langsung aktif di WhatsApp untuk chat, follow-up, reminder, dan support.
                     </p>
-                    <div className="space-y-2">
+                    <div className="space-y-2.5">
                       {['Lead response', 'Auto reminder', 'Customer support', 'Broadcast follow-up'].map((item) => (
-                        <div key={item} className="flex items-center gap-2 rounded-xl bg-white/5 border border-white/10 px-3 py-2 text-sm text-gray-200">
+                        <div key={item} className="flex items-center gap-2 rounded-xl bg-white/5 border border-white/10 px-3 py-2.5 text-sm text-gray-200">
                           <span className="w-2 h-2 rounded-full" style={{ background: '#fdd100' }} />
                           {item}
                         </div>
                       ))}
                     </div>
                   </div>
-                  <div className="hidden lg:flex absolute -right-3 top-[4.85rem] w-7 h-7 rounded-full items-center justify-center bg-white border border-yellow-200 shadow-md">
-                    <ArrowRight size={14} className="text-gray-700" />
-                  </div>
                 </div>
+              </div>
 
-                <div className="relative rounded-3xl bg-white/90 border border-yellow-100 p-5 shadow-[0_20px_45px_rgba(17,24,39,0.06)] backdrop-blur">
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 xl:gap-8 xl:px-[8%]">
+                <div className="relative rounded-3xl bg-white/92 border border-yellow-100 p-6 shadow-[0_20px_45px_rgba(17,24,39,0.06)] backdrop-blur xl:min-h-[330px] xl:ml-0 ml-8">
                   <div className="flex items-center justify-between mb-5">
                     <span className="text-xs font-bold tracking-widest text-gray-400">STEP 04</span>
                     <div className="w-11 h-11 rounded-2xl flex items-center justify-center bg-yellow-100 text-gray-900 shadow-sm">
                       <PlugZap size={20} />
                     </div>
                   </div>
-                  <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2">Connect your ecosystem</h3>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Connect your ecosystem</h3>
                   <p className="text-sm text-gray-600 leading-relaxed mb-4">
                     Agent tidak berhenti di chat — ia terhubung ke tools kerja dan data yang kamu pakai setiap hari.
                   </p>
@@ -444,12 +460,9 @@ const HowItWorksSection: React.FC = () => {
                       );
                     })}
                   </div>
-                  <div className="hidden lg:flex absolute -right-3 top-[4.85rem] w-7 h-7 rounded-full items-center justify-center bg-white border border-yellow-200 shadow-md">
-                    <ArrowRight size={14} className="text-gray-700" />
-                  </div>
                 </div>
 
-                <div className="relative rounded-3xl border border-yellow-200 p-5 shadow-[0_24px_60px_rgba(253,209,0,0.22)] overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(253,209,0,0.96) 0%, rgba(255,243,183,0.96) 100%)' }}>
+                <div className="relative rounded-3xl border border-yellow-200 p-6 shadow-[0_24px_60px_rgba(253,209,0,0.22)] overflow-hidden xl:min-h-[330px] xl:ml-0 ml-8" style={{ background: 'linear-gradient(135deg, rgba(253,209,0,0.96) 0%, rgba(255,243,183,0.96) 100%)' }}>
                   <div className="absolute top-0 right-0 h-28 w-28 rounded-full blur-3xl" style={{ background: 'rgba(255,255,255,0.35)' }} />
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-5">
@@ -458,7 +471,7 @@ const HowItWorksSection: React.FC = () => {
                         <Rocket size={20} className="text-gray-900" />
                       </div>
                     </div>
-                    <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2">See the outcome clearly</h3>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">See the outcome clearly</h3>
                     <p className="text-sm text-gray-800 leading-relaxed mb-4">
                       Elite Virtual Assistant menjalankan kombinasi fokus yang kamu pilih dan membantu scale up pekerjaan secara konsisten.
                     </p>
