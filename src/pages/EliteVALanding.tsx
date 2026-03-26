@@ -193,21 +193,21 @@ const HeroSection: React.FC = () => (
         </div>
 
         {/* Right: hero image visual */}
-        <div className="relative flex items-end justify-center min-h-[320px] sm:min-h-[420px] lg:min-h-[560px]">
+        <div className="relative flex items-end justify-center min-h-[280px] sm:min-h-[360px] lg:min-h-[460px]">
           <div className="absolute w-56 h-56 sm:w-80 sm:h-80 lg:w-[28rem] lg:h-[28rem] rounded-full border border-yellow-100" style={{ background: 'rgba(253,209,0,0.07)' }} />
           <div className="absolute w-44 h-44 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full border border-yellow-200" style={{ background: 'rgba(253,209,0,0.13)' }} />
 
           <img
             src="/eliteva-hero.png"
             alt="EliteVA AI assistant"
-            className="relative z-10 w-[260px] sm:w-[360px] lg:w-[520px] h-auto object-contain drop-shadow-[0_20px_60px_rgba(17,24,39,0.22)]"
+            className="relative z-10 w-[182px] sm:w-[252px] lg:w-[364px] h-auto object-contain drop-shadow-[0_20px_60px_rgba(17,24,39,0.22)]"
           />
 
           {/* Floating badges — hidden on xs, show on sm+ */}
-          <div className="hidden sm:flex absolute top-6 right-2 lg:top-10 lg:right-4 bg-white rounded-2xl px-3 py-2 shadow-lg items-center gap-2 text-xs sm:text-sm font-semibold text-gray-700">
+          <div className="hidden sm:flex absolute top-5 right-0 lg:top-8 lg:right-0 bg-white rounded-2xl px-3 py-2 shadow-lg items-center gap-2 text-xs sm:text-sm font-semibold text-gray-700">
             <span className="text-green-500">●</span> Always Active
           </div>
-          <div className="hidden sm:flex absolute bottom-8 left-4 lg:bottom-14 lg:left-2 bg-white rounded-2xl px-3 py-2 shadow-lg items-center gap-2 text-xs sm:text-sm font-semibold text-gray-700">
+          <div className="hidden sm:flex absolute bottom-6 left-0 lg:bottom-10 lg:left-0 bg-white rounded-2xl px-3 py-2 shadow-lg items-center gap-2 text-xs sm:text-sm font-semibold text-gray-700">
             <Zap size={13} style={{ color: '#fdd100' }} /> AI-Powered
           </div>
         </div>
