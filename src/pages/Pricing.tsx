@@ -73,7 +73,7 @@ const integrations = [
 
 const PricingNavbar: React.FC = () => (
   <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
-    <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
       <Link to="/elite-va" className="flex items-center gap-2">
         <div
           className="w-8 h-8 rounded-full flex items-center justify-center"
@@ -89,39 +89,39 @@ const PricingNavbar: React.FC = () => (
         className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 transition-colors"
       >
         <ArrowLeft size={15} />
-        Kembali ke Landing
+        <span className="hidden sm:inline">Kembali ke Landing</span>
       </Link>
     </div>
   </nav>
 );
 
 const PricingCards: React.FC = () => (
-  <section className="pt-28 pb-16 bg-gradient-to-b from-gray-50 to-white">
-    <div className="max-w-6xl mx-auto px-6">
+  <section className="pt-24 md:pt-28 pb-12 md:pb-16 bg-gradient-to-b from-gray-50 to-white">
+    <div className="max-w-6xl mx-auto px-4 md:px-6">
       {/* Header */}
-      <div className="text-center mb-12">
+      <div className="text-center mb-8 md:mb-12">
         <p
           className="text-xs font-bold tracking-widest uppercase mb-3"
           style={{ color: '#fdd100' }}
         >
           Pricing Plans
         </p>
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-3">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
           Choose Your Perfect Plan
         </h1>
-        <p className="text-gray-500 max-w-md mx-auto">
+        <p className="text-sm md:text-base text-gray-500 max-w-md mx-auto">
           Flexible pricing to match your business needs. Start free, upgrade anytime.
         </p>
       </div>
 
       {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 items-stretch">
         {plans.map((plan) => (
           <div
             key={plan.name}
-            className={`relative flex flex-col rounded-3xl p-8 transition-shadow duration-200 ${
+            className={`relative flex flex-col rounded-3xl p-6 md:p-8 transition-shadow duration-200 ${
               plan.highlighted
-                ? 'shadow-2xl'
+                ? 'shadow-2xl mt-4 md:mt-0'
                 : 'bg-white border border-gray-100 hover:shadow-md'
             }`}
             style={
@@ -233,24 +233,25 @@ const PricingCards: React.FC = () => (
 );
 
 const IntegrationsVisual: React.FC = () => (
-  <section className="pb-20 bg-white">
-    <div className="max-w-4xl mx-auto px-6">
+  <section className="pb-12 md:pb-20 bg-white">
+    <div className="max-w-4xl mx-auto px-4 md:px-6">
       <div
         className="rounded-3xl overflow-hidden relative"
         style={{ background: 'linear-gradient(135deg, #f9f9f9 0%, #fffde7 100%)' }}
       >
-        <div className="flex flex-col md:flex-row items-center gap-8 p-10">
+        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 p-6 md:p-10">
           {/* Left: AI Bot visual */}
-          <div className="flex-shrink-0 flex items-center justify-center w-36 h-36 rounded-full shadow-xl"
+          <div className="flex-shrink-0 flex items-center justify-center w-24 h-24 md:w-36 md:h-36 rounded-full shadow-xl"
             style={{ background: 'linear-gradient(135deg, #fdd100 0%, #e6a800 100%)' }}
           >
-            <Bot size={64} className="text-gray-900" />
+            <Bot size={44} className="text-gray-900 md:hidden" />
+            <Bot size={64} className="text-gray-900 hidden md:block" />
           </div>
 
           {/* Right: text + integration icons */}
-          <div className="flex-1">
+          <div className="flex-1 text-center md:text-left">
             <p className="text-gray-500 text-sm font-semibold mb-1">Works with:</p>
-            <p className="text-2xl font-extrabold text-gray-900 mb-1">
+            <p className="text-xl md:text-2xl font-extrabold text-gray-900 mb-1">
               APIs, AI Models,
             </p>
             <p className="text-gray-600 font-medium mb-5">
@@ -273,7 +274,7 @@ const IntegrationsVisual: React.FC = () => (
         </div>
 
         {/* Bottom text */}
-        <div className="border-t border-gray-100 py-5 px-10 text-center">
+        <div className="border-t border-gray-100 py-4 md:py-5 px-4 md:px-10 text-center">
           <p className="text-gray-700 font-medium">
             Online Support to Scale Up Your Business and make it a{' '}
             <span className="font-extrabold text-gray-900">Betterworks</span>
