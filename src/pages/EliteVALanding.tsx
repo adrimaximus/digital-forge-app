@@ -529,40 +529,42 @@ const HowItWorksSection: React.FC = () => {
                 )}
 
                 {currentStep === 3 && (
-                  <div className="space-y-4">
-                    <p className="text-xs font-bold uppercase tracking-widest text-gray-400">Connected tools · pilih sampai 4</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {ecosystemOptions.map((item) => {
-                        const Icon = item.icon;
-                        const active = selectedIntegrations.includes(item.id);
-                        return (
-                          <button
-                            key={item.id}
-                            type="button"
-                            onClick={() => toggleLimitedSelection(selectedIntegrations, item.id, setSelectedIntegrations, 4)}
-                            className={`rounded-2xl border p-4 text-left transition-all duration-200 ${
-                              active ? 'border-yellow-300 bg-yellow-50 shadow-[0_12px_30px_rgba(253,209,0,0.16)]' : 'border-gray-200 bg-white hover:border-yellow-200'
-                            }`}
-                          >
-                            <div className="flex items-start gap-3">
-                              <div className={`w-11 h-11 rounded-2xl flex items-center justify-center ${item.bg} ${item.color}`}>
-                                <Icon size={18} />
-                              </div>
-                              <div className="flex-1">
-                                <div className="flex items-center justify-between gap-3">
-                                  <p className="text-sm font-semibold text-gray-900">{item.label}</p>
-                                  {active && <span className="text-[10px] font-bold tracking-widest uppercase text-gray-900">Selected</span>}
+                  <div className="rounded-3xl border border-gray-100 bg-white p-5 md:p-6 shadow-sm">
+                    <div className="space-y-4">
+                      <p className="text-xs font-bold uppercase tracking-widest text-gray-400">Connected tools · pilih sampai 4</p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {ecosystemOptions.map((item) => {
+                          const Icon = item.icon;
+                          const active = selectedIntegrations.includes(item.id);
+                          return (
+                            <button
+                              key={item.id}
+                              type="button"
+                              onClick={() => toggleLimitedSelection(selectedIntegrations, item.id, setSelectedIntegrations, 4)}
+                              className={`rounded-2xl border p-4 text-left transition-all duration-200 ${
+                                active ? 'border-yellow-300 bg-yellow-50 shadow-[0_12px_30px_rgba(253,209,0,0.16)]' : 'border-gray-200 bg-white hover:border-yellow-200'
+                              }`}
+                            >
+                              <div className="flex items-start gap-3">
+                                <div className={`w-11 h-11 rounded-2xl flex items-center justify-center ${item.bg} ${item.color}`}>
+                                  <Icon size={18} />
                                 </div>
-                                <p className="text-xs text-gray-500 mt-1">Connected into the agent workflow</p>
+                                <div className="flex-1">
+                                  <div className="flex items-center justify-between gap-3">
+                                    <p className="text-sm font-semibold text-gray-900">{item.label}</p>
+                                    {active && <span className="text-[10px] font-bold tracking-widest uppercase text-gray-900">Selected</span>}
+                                  </div>
+                                  <p className="text-xs text-gray-500 mt-1">Connected into the agent workflow</p>
+                                </div>
                               </div>
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                    <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
-                      <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Connected ecosystem</p>
-                      <p className="text-sm text-gray-700">{selectedIntegrationLabels.join(' + ')}</p>
+                            </button>
+                          );
+                        })}
+                      </div>
+                      <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+                        <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Connected ecosystem</p>
+                        <p className="text-sm text-gray-700">{selectedIntegrationLabels.join(' + ')}</p>
+                      </div>
                     </div>
                   </div>
                 )}
