@@ -20,6 +20,8 @@ import ServiceAdd from "./pages/ServiceAdd";
 import ServiceEdit from "./pages/ServiceEdit";
 import CategoryManagement from "./pages/CategoryManagement";
 import ServiceManagement from "./pages/ServiceManagement";
+import EliteVALanding from "./pages/EliteVALanding";
+import Pricing from "./pages/Pricing";
 
 // Create the query client outside of the component
 const queryClient = new QueryClient();
@@ -70,6 +72,8 @@ const App = () => {
           <Route path="/admin/solusi/add" element={<ServiceAdd />} />
           <Route path="/service/edit/:id" element={<ServiceEdit />} />
           <Route path="/admin/categories" element={<CategoryManagement />} />
+          <Route path="/elite-va" element={<EliteVALanding />} />
+          <Route path="/pricing" element={<Pricing />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

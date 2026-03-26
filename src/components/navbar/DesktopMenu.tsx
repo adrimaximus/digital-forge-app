@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import NavItem from './NavItem';
-import { LogIn, ShoppingCart, TrendingUp } from 'lucide-react';
+import { LogIn, ShoppingCart, TrendingUp, Bot } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface DesktopMenuProps {
@@ -48,6 +48,10 @@ const DesktopMenu: React.FC<DesktopMenuProps> = ({ navItems }) => {
         <Link to="/seo-analysis" className="text-gray-300 hover:text-white transition-colors flex items-center">
           <TrendingUp className="mr-1 h-4 w-4 text-yellow-400" />
           Trend Analysis
+        </Link>
+        <Link to="/elite-va" className="text-gray-300 hover:text-white transition-colors flex items-center">
+          <Bot className="mr-1 h-4 w-4 text-yellow-400" />
+          EliteVA
         </Link>
       </ul>
       

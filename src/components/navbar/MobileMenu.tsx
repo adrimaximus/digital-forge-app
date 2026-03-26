@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import NavItem from './NavItem';
-import { LogIn, Sparkles, ShoppingCart, TrendingUp } from 'lucide-react';
+import { LogIn, Sparkles, ShoppingCart, TrendingUp, Bot } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 interface MobileMenuProps {
@@ -79,6 +79,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, navItems, onItemClick }
         <Link to="/seo-analysis" onClick={onItemClick} className="text-gray-300 hover:text-white transition-colors flex items-center">
           <TrendingUp className="mr-1 h-4 w-4 text-yellow-400" />
           Trend Analysis
+        </Link>
+        <Link to="/elite-va" onClick={onItemClick} className="text-gray-300 hover:text-white transition-colors flex items-center">
+          <Bot className="mr-1 h-4 w-4 text-yellow-400" />
+          EliteVA
         </Link>
         
         {isMasterAdmin() && (
