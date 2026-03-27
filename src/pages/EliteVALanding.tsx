@@ -74,7 +74,7 @@ const services = [
     icon: <DollarSign size={22} />,
     iconBg: 'bg-yellow-100',
     iconColor: 'text-yellow-600',
-    title: 'Budgeting',
+    title: 'Budgeting & Finance',
     desc: 'Track expenses and manage budgets with smart financial tools.',
   },
   {
