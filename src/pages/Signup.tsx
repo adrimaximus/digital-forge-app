@@ -203,7 +203,7 @@ const SignupNavbar: React.FC = () => (
       </Link>
       <div className="flex items-center gap-3">
         <span className="hidden sm:block text-sm text-gray-500">Already have an account?</span>
-        <Link to="/admin" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-gray-200 text-gray-700 text-sm font-semibold hover:border-yellow-300 transition-colors">
+        <Link to="/login" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-gray-200 text-gray-700 text-sm font-semibold hover:border-yellow-300 transition-colors">
           <LogIn size={14} /> Login
         </Link>
       </div>
@@ -214,22 +214,37 @@ const SignupNavbar: React.FC = () => (
 // ─── Pain chips ───────────────────────────────────────────────────────────────
 
 const PAIN_EXAMPLES = [
-  'Follow-up pelanggan sering terlewat dan tidak konsisten',
-  'Terlalu banyak pesan masuk WhatsApp yang tidak tertangani tepat waktu',
-  'Data tersebar di banyak tempat dan sulit direkap secara akurat',
-  'Proses order dilakukan manual, lambat, dan rawan human error',
-  'Sulit memantau performa tim dan progress secara real-time',
-  'Jadwal dan appointment sering bentrok atau tidak ter-reminder',
-  'Lead dari berbagai platform tidak ter-follow-up secara otomatis',
-  'Email campaign dan broadcast dilakukan satu per satu secara manual',
+  'Customer follow-ups are frequently missed and inconsistent',
+  'Too many incoming WhatsApp messages go unresponded in time',
+  'Data is scattered across platforms and hard to consolidate accurately',
+  'Order processing is manual, slow, and prone to human error',
+  'Difficult to monitor team performance and progress in real-time',
+  'Schedules and appointments often clash or go unreminded',
+  'Leads from multiple platforms are not followed up automatically',
+  'Email campaigns and broadcasts are sent one-by-one manually',
 ];
+
+const PLAN_BENEFITS: Record<string, { price: string; features: string[] }> = {
+  Starter: {
+    price: '$29/mo',
+    features: ['500 AI actions per month', 'Email automation', 'Basic CRM features', 'Data entry assistance', 'Email support', '1 user seat'],
+  },
+  Professional: {
+    price: '$79/mo',
+    features: ['2,500 AI actions per month', 'All Starter features', 'WhatsApp automation', 'Smart reminders', 'Priority support', '1 user seat'],
+  },
+  Enterprise: {
+    price: '$199/mo',
+    features: ['Unlimited AI actions', 'All Professional features', '24/7 customer service bot', 'Web scraping tools', 'Custom integrations', 'Dedicated account manager', '3 user seats'],
+  },
+};
 
 // ─── Main page ────────────────────────────────────────────────────────────────
 
 const Signup: React.FC = () => {
   const [form, setForm] = useState({
     name: '', businessName: '', email: '', phone: '',
-    businessType: '', planInterest: '', businessPains: '',
+    businessType: '', customBusinessType: '', planInterest: '', businessPains: '',
   });
   const [isThinking, setIsThinking] = useState(false);
   const [thinkingStep, setThinkingStep] = useState(0);
@@ -238,6 +253,7 @@ const Signup: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [selectedPains, setSelectedPains] = useState<string[]>([]);
   const recRef = useRef<HTMLDivElement>(null);
 
   const canGenerate =
@@ -257,12 +273,27 @@ const Signup: React.FC = () => {
   };
 
   const appendPain = (pain: string) => {
-    setForm((prev) => ({
-      ...prev,
-      businessPains: prev.businessPains
-        ? `${prev.businessPains.trimEnd()}\n${pain}`
-        : pain,
-    }));
+    const alreadySelected = selectedPains.includes(pain);
+    if (alreadySelected) {
+      // Deselect: remove from textarea and selectedPains
+      setSelectedPains((prev) => prev.filter((p) => p !== pain));
+      setForm((prev) => ({
+        ...prev,
+        businessPains: prev.businessPains
+          .split('\n')
+          .filter((line) => line.trim() !== pain.trim())
+          .join('\n')
+          .trim(),
+      }));
+    } else {
+      setSelectedPains((prev) => [...prev, pain]);
+      setForm((prev) => ({
+        ...prev,
+        businessPains: prev.businessPains
+          ? `${prev.businessPains.trimEnd()}\n${pain}`
+          : pain,
+      }));
+    }
     setShowRec(false);
     setRecommendation(null);
   };
@@ -298,8 +329,8 @@ const Signup: React.FC = () => {
     }
   }, [showRec]);
 
-  const handleSubmit = async () => {
-    if (!canGenerate || !recommendation) return;
+  const handleSubmit = async (withRec: boolean = true) => {
+    if (!canGenerate) return;
     setIsSubmitting(true);
     setSubmitError('');
     const { error } = await supabase.from('eliteva_signups').insert({
@@ -310,8 +341,10 @@ const Signup: React.FC = () => {
       business_type: form.businessType,
       plan_interest: form.planInterest,
       business_pains: form.businessPains.trim(),
-      ai_recommendation: recommendation,
+      ai_recommendation: withRec ? recommendation : null,
       status: 'new',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ...(form.businessType === 'Other / Lainnya' && form.customBusinessType.trim() && { business_type: form.customBusinessType.trim() }),
     });
     setIsSubmitting(false);
     if (error) {
@@ -422,7 +455,7 @@ const Signup: React.FC = () => {
             <div>
               <p className="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 mb-4">Your Business</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="sm:col-span-2 md:col-span-1">
+                <div className="sm:col-span-2 md:col-span-1 space-y-2">
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Business Type <span className="text-red-400">*</span></label>
                   <select
                     name="businessType" value={form.businessType} onChange={handleChange}
@@ -433,8 +466,15 @@ const Signup: React.FC = () => {
                       <option key={bt} value={bt}>{bt}</option>
                     ))}
                   </select>
+                  {form.businessType === 'Other / Lainnya' && (
+                    <input
+                      name="customBusinessType" value={form.customBusinessType} onChange={handleChange}
+                      placeholder="Describe your business type..."
+                      className="w-full rounded-xl border border-yellow-300 bg-yellow-50 px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-yellow-400 transition-colors"
+                    />
+                  )}
                 </div>
-                <div>
+                <div className="space-y-2">
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Plan Interest <span className="text-red-400">*</span></label>
                   <select
                     name="planInterest" value={form.planInterest} onChange={handleChange}
@@ -445,6 +485,21 @@ const Signup: React.FC = () => {
                     <option value="Professional">Professional — $79/mo</option>
                     <option value="Enterprise">Enterprise — $199/mo</option>
                   </select>
+                  {form.planInterest && PLAN_BENEFITS[form.planInterest] && (
+                    <div className="rounded-xl border border-yellow-200 bg-yellow-50 px-4 py-3">
+                      <p className="text-[10px] font-bold tracking-widest uppercase text-gray-400 mb-2">
+                        {form.planInterest} plan — {PLAN_BENEFITS[form.planInterest].price}
+                      </p>
+                      <div className="space-y-1.5">
+                        {PLAN_BENEFITS[form.planInterest].features.map((f) => (
+                          <div key={f} className="flex items-center gap-2 text-xs text-gray-700">
+                            <Check size={11} className="text-gray-900 flex-shrink-0" />
+                            {f}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -460,14 +515,21 @@ const Signup: React.FC = () => {
 
               {/* Example chips */}
               <div className="flex flex-wrap gap-2 mb-3">
-                {PAIN_EXAMPLES.map((p) => (
-                  <button
-                    key={p} type="button" onClick={() => appendPain(p)}
-                    className="text-xs px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 hover:border-yellow-300 hover:bg-yellow-50 transition-all"
-                  >
-                    + {p.length > 48 ? p.slice(0, 48) + '…' : p}
-                  </button>
-                ))}
+                {PAIN_EXAMPLES.map((p) => {
+                  const selected = selectedPains.includes(p);
+                  return (
+                    <button
+                      key={p} type="button" onClick={() => appendPain(p)}
+                      className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
+                        selected
+                          ? 'border-yellow-400 bg-yellow-100 text-gray-900 font-semibold'
+                          : 'border-gray-200 text-gray-600 hover:border-yellow-300 hover:bg-yellow-50'
+                      }`}
+                    >
+                      {selected ? '✓' : '+'} {p.length > 48 ? p.slice(0, 48) + '…' : p}
+                    </button>
+                  );
+                })}
               </div>
 
               <textarea
@@ -480,18 +542,30 @@ const Signup: React.FC = () => {
 
           </div>
 
-          {/* Generate button */}
+          {/* Generate + Submit buttons */}
           {canGenerate && !isThinking && !showRec && (
-            <div className="mt-6 text-center">
-              <button
-                onClick={handleGenerate}
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-gray-900 font-bold text-sm md:text-base hover:opacity-90 transition-opacity shadow-[0_8px_30px_rgba(253,209,0,0.35)]"
-                style={{ background: '#fdd100' }}
-              >
-                <Sparkles size={18} />
-                Generate My AI Agent Setup
-              </button>
-              <p className="text-xs text-gray-400 mt-3">We'll analyze your profile and build a personalized recommendation</p>
+            <div className="mt-6 space-y-3">
+              <div className="text-center">
+                <button
+                  onClick={handleGenerate}
+                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-gray-900 font-bold text-sm md:text-base hover:opacity-90 transition-opacity shadow-[0_8px_30px_rgba(253,209,0,0.35)]"
+                  style={{ background: '#fdd100' }}
+                >
+                  <Sparkles size={18} />
+                  Generate My AI Agent Setup
+                </button>
+                <p className="text-xs text-gray-400 mt-2">Get a personalized tool & focus recommendation first</p>
+              </div>
+              <div className="text-center">
+                <button
+                  onClick={() => handleSubmit(false)}
+                  disabled={isSubmitting}
+                  className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-gray-200 text-gray-700 text-sm font-semibold hover:border-yellow-300 transition-colors disabled:opacity-60"
+                >
+                  {isSubmitting ? <><Loader2 size={14} className="animate-spin" /> Saving...</> : <>Submit Directly <ArrowRight size={14} /></>}
+                </button>
+                {submitError && <p className="text-xs text-red-500 mt-2">{submitError}</p>}
+              </div>
             </div>
           )}
 

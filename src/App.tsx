@@ -24,6 +24,7 @@ import EliteVALanding from "./pages/EliteVALanding";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About";
 import Signup from "./pages/Signup";
+import LoginPage from "./pages/Login";
 
 // Create the query client outside of the component
 const queryClient = new QueryClient();
@@ -49,6 +50,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Navigate to="/elite-va" replace />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<LoginPage onLogin={(email, role) => { localStorage.setItem('userRole', role); window.location.href = '/admin'; }} />} />
           <Route path="/admin/services" element={<ServiceManagement />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />

@@ -45,7 +45,7 @@ const AboutNavbar: React.FC = () => (
 
       <div className="flex items-center gap-2">
         <Link
-          to="/admin"
+          to="/login"
           className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-gray-200 text-gray-700 text-sm font-semibold hover:border-yellow-300 transition-colors"
         >
           <LogIn size={14} />
