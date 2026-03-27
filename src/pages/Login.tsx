@@ -131,7 +131,7 @@ const SignupForm: React.FC<{ onSuccess: (name: string) => void }> = ({ onSuccess
   };
 
   const handleGenerate = () => {
-    if (!canGenerate || isThinking) return;
+    if (!canSubmit || isThinking) return;
     setIsThinking(true); setThinkingStep(0); setShowRec(false); setRecommendation(null);
     const t1 = setTimeout(() => setThinkingStep(1), 800);
     const t2 = setTimeout(() => setThinkingStep(2), 1700);
